@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一个像夏天一个像秋天 - 谢谢你</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #A8C5D8; --primary-light: #D4E5ED; --primary-dark: #7BA3BC; --text: #3D5A6C; --text-light: #6B8A9E; --white: #FAFCFD; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Serif SC', 'ZCOOL XiaoWei', Georgia, serif; background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 50%, #E8F4F8 100%); min-height: 100vh; color: var(--text); line-height: 2; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(168, 197, 216, 0.95); display: flex; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.8s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .letter-container { background: var(--white); max-width: 600px; width: 90%; padding: 48px 40px; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); position: relative; animation: slideUp 0.8s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .close-btn { position: absolute; top: 16px; right: 20px; width: 36px; height: 36px; border: none; background: var(--primary-light); border-radius: 50%; font-size: 20px; color: var(--text-light); cursor: pointer; transition: all 0.3s ease; }
+        .close-btn:hover { background: var(--primary); color: var(--white); transform: rotate(90deg); }
+        .letter-content { font-size: 1.05rem; line-height: 2.2; color: var(--text); white-space: pre-line; }
+        .letter-content .signature { text-align: right; margin-top: 32px; font-size: 0.95rem; color: var(--text-light); }
+        .main-content { display: none; min-height: 100vh; padding: 60px 20px; animation: fadeIn 1s ease; }
+        .main-content.show { display: block; }
+        .container { max-width: 600px; margin: 0 auto; text-align: center; }
+        .gift-image { width: 100%; max-width: 320px; border-radius: 16px; box-shadow: 0 12px 40px rgba(122,163,188,0.25); margin: 20px 0 30px; }
+        .thanks-text { font-size: 1.3rem; color: var(--text); margin: 24px 0; font-family: 'ZCOOL XiaoWei', serif; }
+        .thanks-text .heart { color: #E91E63; font-size: 1.5rem; }
+        .music-btn { background: var(--primary-dark); color: var(--white); border: none; padding: 14px 36px; border-radius: 30px; font-size: 1rem; cursor: pointer; margin: 20px 0; transition: all 0.3s ease; font-family: inherit; }
+        .music-btn:hover { background: var(--text); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(122,163,188,0.4); }
+        .footer { margin-top: 50px; color: var(--text-light); font-size: 0.9rem; }
+        @media (max-width: 600px) { .letter-container { padding: 36px 24px; } .letter-content { font-size: 0.95rem; } .gift-image { max-width: 260px; } }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="letterOverlay">
+        <div class="letter-container">
+            <button class="close-btn" onclick="closeLetter()">×</button>
+            <div class="letter-content">收到这份沉甸甸的礼物，我好惊喜，也好幸福。这份用兼职的钱换来的礼物，里面含着你的走过的路，教过的学生，好不容易，我也当过这些，所以我知道挣这份钱多难。
+
+我的生活常是一人独行，能有时与你畅聊一会于我而言像是放松，我还能知道这世上有人与我同在。
+
+感谢这份同频，感谢你的礼物，我很喜欢！
+
+爱你花花！
+            <div class="signature">格 于2026.4.23日写下</div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content" id="mainContent">
+        <div class="container">
+            <img src="https://i.ibb.co/S4J1cgVk/IMG-20260423-19.50.55.jpg" alt="无印良品香水" class="gift-image">
+            <div class="thanks-text">
+                <span class="heart">♥</span> 谢谢你，我最亲爱的朋友 <span class="heart">♥</span>
+            </div>
+            <p style="color:var(--text-light);margin:16px 0;font-size:0.95rem;">你是夏天也是秋天，<br>是四季里最温暖的陪伴。</p>
+            <button class="music-btn" onclick="toggleMusic()">播放歌曲</button>
+            <audio id="bgm" loop><source src="https://music.163.com/song/media/outer/url?id=167982" type="audio/mpeg"></audio>
+            <div class="footer"><p>From 格 to HUAHUA</p></div>
+        </div>
+    </div>
+    <script>
+        let isPlaying = false;
+        function closeLetter() { document.getElementById('letterOverlay').style.display='none'; document.getElementById('mainContent').classList.add('show'); }
+        function toggleMusic() { const a=document.getElementById('bgm'); const b=document.querySelector('.music-btn'); if(isPlaying){a.pause();b.textContent='播放歌曲'}else{a.play().catch(e=>{});b.textContent='暂停歌曲'} isPlaying=!isPlaying; }
+    </script>
+</body>
+</html>
